@@ -1,0 +1,32 @@
+{
+    "name": "boy4ik/crypto-labs",
+    "description": "student labs for cryptography in national aviation university",
+    "type": "project",
+    "require": {
+        "squizlabs/php_codesniffer": "4.0.x-dev",
+        "wp-cli/php-cli-tools": "dev-master"
+    },
+    "license": "none",
+    "autoload": {
+        "psr-4": {
+            "Boy4ik\\CryptoLabs\\": "src/"
+        },
+        "files": [
+            "src/main.php",
+            "Lab-1/xor/src/core.php",
+            "Lab-1/cezar/src/core.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Andriy Boychenko",
+            "email": "aroneger2018@gmail.com"
+        }
+    ],
+    "bin": [
+        "bin/crypto",
+        "Lab-1/cezar/bin/cezar",
+        "Lab-1/xor/bin/xor"
+    ],
+    "minimum-stability": "dev"
+}
