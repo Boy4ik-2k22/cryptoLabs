@@ -3,7 +3,7 @@
     "description": "student labs for cryptography in national aviation university",
     "type": "project",
     "require": {
-        "squizlabs/php_codesniffer": "4.0.x-dev",
+        "squizlabs/php_codesniffer": "2.2",
         "wp-cli/php-cli-tools": "dev-master"
     },
     "license": "none",
@@ -13,8 +13,8 @@
         },
         "files": [
             "src/main.php",
-            "Lab-1/xor/src/core.php",
-            "Lab-1/cezar/src/core.php"
+            "src/alg/cezar.php",
+            "src/alg/xor.php"
         ]
     },
     "authors": [
@@ -24,9 +24,7 @@
         }
     ],
     "bin": [
-        "bin/crypto",
-        "Lab-1/cezar/bin/cezar",
-        "Lab-1/xor/bin/xor"
+        "bin/crypto"
     ],
     "minimum-stability": "dev"
 }

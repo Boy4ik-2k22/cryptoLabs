@@ -2,10 +2,6 @@ install:
 	@composer install
 crypto:
 	@./bin/crypto
-cezar:
-	@./Lab-1/cezar/bin/cezar
-xor:
-	@./Lab-1/xor/bin/xor
 validate:
 	@composer validate
 lint:

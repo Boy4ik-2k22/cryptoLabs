@@ -9,26 +9,26 @@ use function CryptoLabs\Algoritms\CezarAlg\cryptoCezar;
 
 function choose()
 {
-    $choosenAlg = prompt('Введите алгоритм шифрования');
+    $choosenAlg = prompt('Введіть алгоритм шифрування');
     return $choosenAlg;
 }
 
 function main()
 {
-    $algoritms = ["cezar", "xor"];
+    line("Цифрою виберіть алгоритм шифрування:\n1) Cezar\n2) XOR\n");
     $userChoise = choose();
 
     switch ($userChoise) {
-        case "cezar":
+        case "1":
             cryptoCezar();
             break;
 
-        case "xor":
+        case "2":
             cryptoXor();
             break;
 
         default:
-            line('Неправельно ввели название алгортма. Повторите попытку.');
+            line('Не корректне введення. Повторіть спробу.');
             main();
             break;
     }
