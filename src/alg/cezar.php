@@ -112,7 +112,7 @@ function cryptoCezar()
 {
     setlocale(LC_ALL,"");
 
-    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua')) . "\n2) Російська\n\t" . implode("\n\t", alphabet('ru')) ."\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n4) Всі доступні мови.\n";
+    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua')) . "\n2) Російська\n\t" . implode("\n\t", alphabet('ru')) ."\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n";
 
     $langChoise = prompt("Виберіть цифрою мову кодування");
 
@@ -127,10 +127,6 @@ function cryptoCezar()
 
         case '3':
             $lang = alphabet('en');
-            break;
-
-        case '4':
-            $lang = alphabet('all');
             break;
 
         default:
