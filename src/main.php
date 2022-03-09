@@ -7,8 +7,6 @@ use function cli\line;
 use function CryptoLabs\Algoritms\XorAlg\cryptoXor;
 use function CryptoLabs\Algoritms\CezarAlg\cryptoCezar;
 
-setlocale(LC_ALL,"");
-
 function choose()
 {
     $choosenAlg = prompt('Введіть алгоритм шифрування');
@@ -17,6 +15,8 @@ function choose()
 
 function main()
 {
+    setlocale(LC_ALL, "");
+
     line("Цифрою виберіть алгоритм шифрування:\n1) Cezar\n2) XOR\n");
     $userChoise = choose();
 

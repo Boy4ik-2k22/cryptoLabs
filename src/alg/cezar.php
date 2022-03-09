@@ -21,7 +21,7 @@ function input()
     return file_get_contents($filePath . $fileName);
 }
 
-function encryption(int $key, string $text, array $languages)
+function cezar(int $key, string $text, array $languages, string $type = 'encode')
 {
     $res = '';
     $text = mb_str_split($text, 1, "UTF-8");
@@ -32,51 +32,11 @@ function encryption(int $key, string $text, array $languages)
 
             for ($k = 0; $k < count($symbol); $k++) {
                 if ($text[$i] === $symbol[$k]) {
-                    $tmp = $k + $key;
-
-                    while ($tmp < 0) {
-                        $tmp += count($symbol);
+                    if ($type === 'decode') {
+                        $tmp = $k - $key;
+                    } else {
+                        $tmp = $k + $key;
                     }
-                    while ($tmp >= count($symbol)) {
-                        $tmp -= count($symbol);
-                    }
-
-                    $res .= $symbol[$tmp];
-                }
-            }
-        }
-
-        if ($text[$i] === ' ') {
-            $res .= ' ';
-        }
-        if ($text[$i] === ',') {
-            $res .= ',';
-        }
-        if ($text[$i] === '.') {
-            $res .= '.';
-        }
-        if ($text[$i] === '-') {
-            $res .= '-';
-        }
-    }
-
-    echo $res . PHP_EOL;
-    output($res);
-}
-
-function decryption(int $key, array $languages)
-{
-    $res = '';
-    $text = input();
-    $text = mb_str_split($text, 1, "UTF-8");
-
-    for ($i = 0; $i < count($text); $i++) {
-        for ($j = 0; $j < count($languages); $j++) {
-            $symbol = mb_str_split($languages[$j], 1, "UTF-8");
-
-            for ($k = 0; $k < count($symbol); $k++) {
-                if ($text[$i] === $symbol[$k]) {
-                    $tmp = $k - $key;
 
                     while ($tmp < 0) {
                         $tmp += count($symbol);
@@ -110,13 +70,15 @@ function decryption(int $key, array $languages)
 
 function cryptoCezar()
 {
-    setlocale(LC_ALL,"");
+    setlocale(LC_ALL, "");
 
-    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua')) . "\n2) Російська\n\t" . implode("\n\t", alphabet('ru')) ."\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n";
+    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua'));
+    echo "\n2) Російська\n\t" . implode("\n\t", alphabet('ru'));
+    echo "\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n";
 
     $langChoise = prompt("Виберіть цифрою мову кодування");
 
-    switch($langChoise) {
+    switch ($langChoise) {
         case '1':
             $lang = alphabet('ua');
             break;
@@ -142,23 +104,23 @@ function cryptoCezar()
             do {
                 $key = prompt("Введіть ключ шифрування");
             } while ($key < 1 && $key >= mb_strlen($lang[0]) && is_numeric($key));
-        
+
             $text = readline('Введіть текст для шифрування: ');
-        
-            encryption($key, $text, $lang);
+
+            cezar($key, $text, $lang);
             break;
-        
+
         case '2':
             do {
                 $key = prompt("Введіть ключ шифрування");
             } while ($key < 1 && $key >= mb_strlen($lang[0]) && is_numeric($key));
 
-            decryption($key, $lang);
+            cezar($key, input(), $lang, 'decode');
             break;
 
         default:
-        line('Некорректне введення. Повторіть спробу.');
-        CryptoCezar();
-        break; 
+            line('Некорректне введення. Повторіть спробу.');
+            CryptoCezar();
+            break;
     }
 }

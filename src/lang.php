@@ -26,7 +26,7 @@ function alphabet(string $lang)
         case "ru":
             return [$ruDownLang, $ruUpLang, $digit];
             break;
-            
+
         default:
             line('Не корректне введення. Повторіть спробу.');
             alphabet($lang);
