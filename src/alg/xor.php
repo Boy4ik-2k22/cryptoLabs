@@ -2,24 +2,12 @@
 
 namespace CryptoLabs\Algoritms\XorAlg;
 
-use function CryptoLabs\Languages\alphabet;
 use function cli\line;
-use function cli\prompt;
-
-function output(string $text)
-{
-    $fileName = '\\cypher2.txt';
-    $filePath = __DIR__ . '/../output/';
-
-    file_put_contents(realpath($filePath) . $fileName, $text, LOCK_EX);
-}
-
-function input()
-{
-    $fileName = '\\cypher2.txt';
-    $filePath = __DIR__ . '/../output/';
-    return file_get_contents($filePath . $fileName);
-}
+use function CryptoLabs\Main\input;
+use function CryptoLabs\Main\keyInput;
+use function CryptoLabs\Main\method;
+use function CryptoLabs\Main\output;
+use function CryptoLabs\Main\textInput;
 
 function getRepeatKey(string $text, int $lenth)
 {
@@ -45,28 +33,22 @@ function xorOperation(int $key, string $text)
     }
 
     echo $res . PHP_EOL;
-    output($res);
+    output("\\cypher2.txt", $res);
 }
 
 function cryptoXor()
 {
     setlocale(LC_ALL, "");
 
-    $method = prompt("Виберіть програму роботи:\n1) Шифрування\n2) Дешифрування\nВведіть цифру зі списку");
+    $method = method();
 
     switch ($method) {
         case '1':
-            $key = (int)readline("Введіть ключ шифрування: ");
-
-            $text = (string)readline('Введіть текст для шифрування: ');
-
-            xorOperation($key, $text);
+            xorOperation(keyInput(), textInput());
             break;
 
         case '2':
-            $key = readline("Введіть ключ шифрування: ");
-
-            xorOperation($key, input());
+            xorOperation(keyInput(), input("\\cypher2.txt"));
             break;
 
         default:

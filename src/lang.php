@@ -3,6 +3,7 @@
 namespace CryptoLabs\Languages;
 
 use function cli\line;
+use function cli\prompt;
 
 function alphabet(string $lang)
 {
@@ -32,4 +33,34 @@ function alphabet(string $lang)
             alphabet($lang);
             break;
     }
+}
+
+function chooseLang()
+{
+    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua'));
+    echo "\n2) Російська\n\t" . implode("\n\t", alphabet('ru'));
+    echo "\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n";
+
+    $langChoise = prompt("Виберіть цифрою мову кодування");
+
+    switch ($langChoise) {
+        case '1':
+            $lang = alphabet('ua');
+            break;
+
+        case '2':
+            $lang = alphabet('ru');
+            break;
+
+        case '3':
+            $lang = alphabet('en');
+            break;
+
+        default:
+            line('Некорректне введення. Повторіть спробу.');
+            chooseLang();
+            break;
+    }
+
+    return $lang;
 }
