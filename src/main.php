@@ -6,6 +6,7 @@ use function cli\prompt;
 use function cli\line;
 use function CryptoLabs\Algoritms\XorAlg\cryptoXor;
 use function CryptoLabs\Algoritms\CezarAlg\cryptoCezar;
+use function CryptoLabs\Algoritms\SubstitutionAlg\cryptoSubstitution;
 
 function choose()
 {
@@ -17,7 +18,7 @@ function main()
 {
     setlocale(LC_ALL, "");
 
-    line("Цифрою виберіть алгоритм шифрування:\n1) Cezar\n2) XOR\n");
+    line("Цифрою виберіть алгоритм шифрування:\n1) Цезар\n2) XOR\n3) Метод Заміни\n");
     $userChoise = choose();
 
     switch ($userChoise) {
@@ -27,6 +28,10 @@ function main()
 
         case "2":
             cryptoXor();
+            break;
+
+        case "3":
+            cryptoSubstitution();
             break;
 
         default:

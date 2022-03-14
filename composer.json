@@ -15,7 +15,8 @@
             "src/main.php",
             "src/lang.php",
             "src/alg/cezar.php",
-            "src/alg/xor.php"
+            "src/alg/xor.php",
+            "src/alg/substitution.php"
         ]
     },
     "authors": [
