@@ -57,7 +57,7 @@ function cryptoXor()
     switch ($method) {
         case '1':
             $key = (int)readline("Введіть ключ шифрування: ");
-            
+
             $text = (string)readline('Введіть текст для шифрування: ');
 
             xorOperation($key, $text);
