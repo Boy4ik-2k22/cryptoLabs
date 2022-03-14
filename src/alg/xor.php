@@ -21,12 +21,28 @@ function input()
     return file_get_contents($filePath . $fileName);
 }
 
-function methodXor(int $key, string $text, array $languages, string $type = 'encode')
+function getRepeatKey(string $text, int $lenth)
+{
+    $r = $text;
+
+    while (strlen($r) < $lenth) {
+        $r .= $r;
+    }
+
+    return mb_substr($r, 0, $lenth);
+}
+
+function xorOperation(int $key, string $text)
 {
     $res = '';
-    $text = mb_str_split($text, 1, "UTF-8");
+    $currentKey = getRepeatKey($key, strlen($text));
+    $arrCurrentKey = mb_str_split($currentKey, 1, "UTF-8");
+    $arrText = preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY);
 
-
+    for ($i = 0; $i < count($arrText); $i++) {
+        $tmp = $arrCurrentKey[$i] ^ mb_ord($arrText[$i], "UTF-8");
+        $res .= chr($tmp);
+    }
 
     echo $res . PHP_EOL;
     output($res);
@@ -36,50 +52,21 @@ function cryptoXor()
 {
     setlocale(LC_ALL, "");
 
-    echo "Доступні мови:\n1) Українська\n\t" . implode("\n\t", alphabet('ua'));
-    echo "\n2) Російська\n\t" . implode("\n\t", alphabet('ru'));
-    echo "\n3) Англійська\n\t" . implode("\n\t", alphabet('en')) . "\n";
-
-    $langChoise = prompt("Виберіть цифрою мову кодування");
-
-    switch ($langChoise) {
-        case '1':
-            $lang = alphabet('ua');
-            break;
-
-        case '2':
-            $lang = alphabet('ru');
-            break;
-
-        case '3':
-            $lang = alphabet('en');
-            break;
-
-        default:
-            line('Некорректне введення. Повторіть спробу.');
-            cryptoXor();
-            break;
-    }
-
     $method = prompt("Виберіть програму роботи:\n1) Шифрування\n2) Дешифрування\nВведіть цифру зі списку");
 
     switch ($method) {
         case '1':
-            do {
-                $key = prompt("Введіть ключ шифрування");
-            } while ($key < 1 && $key >= mb_strlen($lang[0]) && is_numeric($key));
+            $key = (int)readline("Введіть ключ шифрування: ");
+            
+            $text = (string)readline('Введіть текст для шифрування: ');
 
-            $text = readline('Введіть текст для шифрування: ');
-
-            methodXor($key, $text, $lang);
+            xorOperation($key, $text);
             break;
 
         case '2':
-            do {
-                $key = prompt("Введіть ключ шифрування");
-            } while ($key < 1 && $key >= mb_strlen($lang[0]) && is_numeric($key));
+            $key = readline("Введіть ключ шифрування: ");
 
-            methodXor($key, input(), $lang, 'decode');
+            xorOperation($key, input());
             break;
 
         default:
