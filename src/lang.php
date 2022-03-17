@@ -17,15 +17,15 @@ function alphabet(string $lang)
 
     switch ($lang) {
         case "ua":
-            return [$uaDownLang, $uaUpLang, $digit];
+            return [$uaUpLang, $uaDownLang, $digit];
             break;
 
         case "en":
-            return [$enDownLang, $enUpLang, $digit];
+            return [$enUpLang, $enDownLang, $digit];
             break;
 
         case "ru":
-            return [$ruDownLang, $ruUpLang, $digit];
+            return [$ruUpLang, $ruDownLang, $digit];
             break;
 
         default:
