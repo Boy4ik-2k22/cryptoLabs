@@ -71,7 +71,7 @@ function textInput()
 function main()
 {
     setlocale(LC_ALL, "");
-    
+
     $userChoise = chooseAlg();
 
     switch ($userChoise) {

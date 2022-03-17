@@ -8,7 +8,8 @@ use function CryptoLabs\Main\input;
 use function CryptoLabs\Main\method;
 use function CryptoLabs\Main\output;
 
-function randomGen($min, $max, $quantity) {
+function randomGen($min, $max, $quantity)
+{
     $numbers = range($min, $max);
     shuffle($numbers);
     return array_slice($numbers, 0, $quantity);
@@ -21,18 +22,18 @@ function generateTextChypher(array $lang)
     $alpDown = mb_str_split($lang[1], 1, "UTF-8");
     $digit = mb_str_split($lang[2], 1, "UTF-8");
     $alphLenth = count($alpUp);
-    $alpCypherNum = randomGen(0, $alphLenth-1, $alphLenth);
+    $alpCypherNum = randomGen(0, $alphLenth - 1, $alphLenth);
     $randomDigit = randomGen(0, 9, 10);
 
-    for ($i = 0; $i < (($alphLenth*2)+10); $i++) {
+    for ($i = 0; $i < (($alphLenth * 2) + 10); $i++) {
         if ($i < $alphLenth) {
             $alpCypher[$i] = $alpUp[$alpCypherNum[$i]];
         }
-        if ($i >= $alphLenth && $i < ($alphLenth*2)) {
-            $alpCypher[$i] = $alpDown[$alpCypherNum[$i-$alphLenth]];
+        if ($i >= $alphLenth && $i < ($alphLenth * 2)) {
+            $alpCypher[$i] = $alpDown[$alpCypherNum[$i - $alphLenth]];
         }
-        if ($i >= ($alphLenth*2) && $i < (($alphLenth*2)+10)) {
-            $alpCypher[$i] = $digit[$randomDigit[$i-($alphLenth*2)]];
+        if ($i >= ($alphLenth * 2) && $i < (($alphLenth * 2) + 10)) {
+            $alpCypher[$i] = $digit[$randomDigit[$i - ($alphLenth * 2)]];
         }
     }
 
